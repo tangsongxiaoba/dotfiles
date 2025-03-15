@@ -1,16 +1,20 @@
 #!/bin/bash
 
-set -e
+set -e # quit in time when meet error
 
 DOTFILES_DIR="$HOME/.dotfiles"
+
+# if pwd is not DOTFILES_DIR, copy and overlay it and then cd into it.
 if [[ "$PWD" != "$DOTFILES_DIR" ]]; then
     if [ -e "$DOTFILES_DIR" ] || [ -L "$DOTFILES_DIR" ]; then
         rm -rf "$DOTFILES_DIR"
     fi
-    ln -s "$PWD" "$DOTFILES_DIR"
+    cp -r "$PWD" "$DOTFILES_DIR"
     cd "$DOTFILES_DIR"
 fi
 
+
+# create ignore file list
 read_ignore_file() {
     local filename="$1"
     if [[ -f "$filename" ]]; then
@@ -31,7 +35,7 @@ ignore_array=()
 read_ignore_file ".ignore"
 read_ignore_file ".ignore.local"
 
-
+# to link file/folder to HOME
 for item in *; do
     skip_item=false
     for ign in "${ignore_array[@]}"; do

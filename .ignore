@@ -1,4 +1,5 @@
 README.md
+run.sh
 #this is a comment, will be ignored. 
 #blankspaces at head or tail in a line will be removed when processing.
 #note that only lines started with '#' or blank lines will be ignored, 
