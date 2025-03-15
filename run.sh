@@ -52,6 +52,12 @@ for item in *; do
     dst="$HOME/.$item"
 
     if [ -d "$src" ]; then
+
+        # if has init.sh in the dir, exec it first
+        if [ -f "$src/init.sh" ]; then
+            bash "$src/init.sh"
+        fi
+
         if [ -e "$dst" ] || [ -L "$dst" ]; then
             rm -rf "$dst"
         fi
