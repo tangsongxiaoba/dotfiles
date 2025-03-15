@@ -1,0 +1,5 @@
+README.md
+#this is a comment, will be ignored. 
+#blankspaces at head or tail in a line will be removed when processing.
+#note that only lines started with '#' or blank lines will be ignored, 
+#so you should not add comments behind one file in the same line.
