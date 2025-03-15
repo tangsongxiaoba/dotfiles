@@ -35,6 +35,15 @@ ignore_array=()
 read_ignore_file ".ignore"
 read_ignore_file ".ignore.local"
 
+exec_bash_local() {
+    local file="$1"
+    local dir=`dirname "$file"`
+    local lwd=`pwd`
+    cd $dir
+    bash $file
+    cd $lwd
+}
+
 # to link file/folder to HOME
 for item in *; do
     skip_item=false
@@ -55,7 +64,7 @@ for item in *; do
 
         # if has init.sh in the dir, exec it first
         if [ -f "$src/init.sh" ]; then
-            bash "$src/init.sh"
+            exec_bash_local "$src/init.sh"
         fi
 
         if [ -e "$dst" ] || [ -L "$dst" ]; then
